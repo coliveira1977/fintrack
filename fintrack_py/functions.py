@@ -128,6 +128,7 @@ INITIAL_DATA = {
         (2, "Emprego", "A"),
         (3, "Relacionamento", "A"),
         (4, "Saúde", "A"),
+        (5, "Pessoal", "A")
     ],
     "account": [
         (1, "Itau Conta Corrente", "A"),
@@ -149,6 +150,7 @@ INITIAL_DATA = {
         (9, "Transporte", "A"),
         (10, "Reunião", "A"),
         (11, "Equipamento", "A"),
+        (12, "Ajuste", "A")
     ],
     "transaction_type": [
         (1, "Despesa", "A"),
