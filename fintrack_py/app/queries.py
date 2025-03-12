@@ -56,7 +56,7 @@ def get_transaction_types():
     """Generate a list with all transaction types"""
     query = (
         "SELECT id_transaction_type, transaction_type_name "
-        "FROM transaction_type"
+        "FROM transaction_type "
         "WHERE situation = 'A';"
     )
 
@@ -68,7 +68,7 @@ def get_transaction_types():
 def get_categories():
     """Generate a list with all categories"""
     query = (
-        "SELECT id_category, category_name"
+        "SELECT id_category, category_name "
         "FROM category WHERE situation = 'A';"
     )
 
@@ -80,7 +80,7 @@ def get_categories():
 def get_subcategories():
     """Generate a list with all subcategories"""
     query = (
-        "SELECT id_subcategory, subcategory_name"
+        "SELECT id_subcategory, subcategory_name "
         "FROM subcategory WHERE situation = 'A';"
     )
     results = get_custom_query(query)

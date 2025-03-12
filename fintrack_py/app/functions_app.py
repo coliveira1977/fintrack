@@ -96,7 +96,8 @@ def get_ticket_df(dict_classification):
         name_product = row.find("span", class_=region_class[0]).text.strip()
 
         cod_product = row.find("span", class_="RCod").text
-        cod_product = cod_product.strip().replace("(Código: ", "")
+        cod_product = re.sub(r"\s+", "", cod_product)
+        cod_product = cod_product.strip().replace("(Código:", "")
         cod_product = cod_product.replace(")", "")
 
         quantity = row.find("span", class_="Rqtd").text
@@ -135,7 +136,7 @@ def get_ticket_df(dict_classification):
 
     # Extrair data e hora a partir de "Protocolo de Autorização"
     texto_infos = soup.find("div", id="infos").text
-    match = re.search(r"Protocolo de Autorização: .*?(\d{2}/\d{2}/\d{4}) (\d{2}:\d{2}:\d{2})", texto_infos)
+    match = re.search(r'(\d{2}/\d{2}/\d{4})\s+(\d{2}:\d{2}:\d{2})', texto_infos)
     if match:
         # dt_ticket = match.group(1)
         dt_ticket = datetime.strptime(match.group(1), "%d/%m/%Y")
@@ -148,6 +149,10 @@ def get_ticket_df(dict_classification):
     # Extrair informações do estabelecimento
     store_name = soup.find("div", class_="txtTopo").text.strip()
     store_address = " ".join([x.text.strip() for x in soup.find_all("div", class_="text")])
+    # Remover "CNPJ:" e o número do CNPJ
+    store_address = re.sub(r'CNPJ:\s*\d{2}\.\d{3}\.\d{3}/\d{4}-\d{2}', '', store_address).strip()
+    # Remover quebras de linha e espaços extras
+    store_address = " ".join(line.strip() for line in store_address.splitlines() if line.strip())
 
     # Criar DataFrame do estabelecimento
     df_store = pd.DataFrame([[

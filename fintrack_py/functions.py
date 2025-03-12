@@ -96,7 +96,7 @@ def create_tables():
             "ticket": """
                 CREATE TABLE IF NOT EXISTS ticket (
                     id_ticket INT AUTO_INCREMENT PRIMARY KEY,
-                    cod_product VARCHAR(100) NOT NULL,
+                    cod_product BIGINT NOT NULL,
                     name_product VARCHAR(255) NOT NULL,
                     quantity DECIMAL(10,2) NOT NULL,
                     measure VARCHAR(50) NOT NULL,
